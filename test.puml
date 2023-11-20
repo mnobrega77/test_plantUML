@@ -20,3 +20,8 @@ Admin --> (Admin the application)
 ' Vous pouvez également utiliser le mot-clé actor pour définir un acteur. 
 ' Un alias peut être attribué à l'aide du mot-clé as et peut être utilisé ultérieurement à la place du nom de l'acteur, 
 ' par exemple lors de la définition des relations.
+
+' doc here!! 
+' https://plantuml.com/fr/use-case-diagram?utm_content=cmp-true
+
+' https://github.com/chippyash/db-plantuml
