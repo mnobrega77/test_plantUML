@@ -1,0 +1,22 @@
+@startuml test
+
+:User: --> (Use)
+"Main Admin" as Admin
+"Use the application" as (Use)
+Admin --> (Admin the application)
+:Client: --> (watch the catalogue)
+:Commercial: --> (watch the catalogue)
+@enduml
+
+
+@enduml
+
+' add plantumUMl extension
+' apt install plantumuml
+' apt install graphviz
+' dot -c 
+
+' Le nom définissant un acteur est placé entre deux points.
+' Vous pouvez également utiliser le mot-clé actor pour définir un acteur. 
+' Un alias peut être attribué à l'aide du mot-clé as et peut être utilisé ultérieurement à la place du nom de l'acteur, 
+' par exemple lors de la définition des relations.
