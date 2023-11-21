@@ -1,11 +1,24 @@
-@startuml test
+@startuml médiathèque
+left to right direction
+actor Lecteur as l
+package Personnel {
+    actor Bénévole as b
+    actor Employé as e
+}
+package Mediatheque {
+    usecase "Consulte les documents" as UCConsDoc
+    usecase "Enregistre les emprunts" as UCEnregEmp
+    usecase "Consulte la situation de chaque lecteur" as UCConsLect
+}
+l --> UCConsDoc
+b --> UCEnregEmp
+e --> UCConsLect
+e --> UCEnregEmp
 
-:User: --> (Use)
-"Main Admin" as Admin
-"Use the application" as (Use)
-Admin --> (Admin the application)
-:Client: --> (watch the catalogue)
-:Commercial: --> (watch the catalogue)
+
+
+
+
 @enduml
 
 
@@ -25,3 +38,4 @@ Admin --> (Admin the application)
 ' https://plantuml.com/fr/use-case-diagram?utm_content=cmp-true
 
 ' https://github.com/chippyash/db-plantuml
+
