@@ -30,8 +30,8 @@ participant "Enregistrement emprunt" as EE
 
 Lecteur -> MS: Présente carte et documents
 MS -> MS: Vérifie cotisation et nombre d'emprunts
-alt Loan Granted?
-  MS -> EE: Record Loan (Subscriber number, document rating, date)
+alt Emprunt réussi? 
+  MS -> EE: Enregistrer emprunt (Infos lecteur, date, infos documents)
   alt Le lecteur a payé sa cotisation?
     MS -> MS: Update loan records
     MS -> MS: Emprunt réussi
