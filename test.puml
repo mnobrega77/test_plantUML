@@ -1,28 +1,66 @@
 @startuml médiathèque
-left to right direction
-actor Lecteur as l
-package Personnel {
-    actor Bénévole as b
-    actor Employé as e
-}
-package Mediatheque {
-    usecase "Consulte les documents" as UCConsDoc
-    usecase "Enregistre les emprunts" as UCEnregEmp
-    usecase "Consulte la situation de chaque lecteur" as UCConsLect
-}
-l --> UCConsDoc
-b --> UCEnregEmp
-e --> UCConsLect
-e --> UCEnregEmp
 
+<-- use case gestion des emprunts -->
 
+actor Lecteur as Lc
+actor Personnel as Staff
+actor Benevole as Bn
 
+usecase "Cherche document" as Search
+usecase "Gestion des abonnés" as ManageDetails
+usecase "Enregistrement des emprunts" as RecordLoan
+usecase "Envoie lettre relance" as SendReminder
+usecase "Consulte l'état des abonnements" as ViewStatus
 
+Lc --> Search
+Staff --> ManageDetails
+Staff --> ViewStatus
+Staff --> RecordLoan
+Bn --> RecordLoan
+SendReminder --> ViewStatus
 
+@enduml
+
+<-- diagramme de séquence gestion des emprunts -->
+
+@startuml
+actor Lecteur
+participant "Médiatheque Sys" as MS
+participant "Enregistrement emprunt" as EE
+
+Lecteur -> MS: Présente carte et documents
+MS -> MS: Vérifie cotisation et nombre d'emprunts
+alt Loan Granted?
+  MS -> EE: Record Loan (Subscriber number, document rating, date)
+  alt Le lecteur a payé sa cotisation?
+    MS -> MS: Update loan records
+    MS -> MS: Emprunt réussi
+  else Emprunt impossible
+    MS -> MS: Update enregistrements emprunts
+  end
+else Emprunt impossible
+  MS -> MS: Update enregistrements emprunts
+end
+MS -> EE: Update enregistrements emprunts
+Lecteur -> MS: Return loan status
 @enduml
 
 
+<-- diagramme d'activité gestion des emprunts -->
+
+@startuml
+start
+:Le lecteur présente carte d'abonnement et documents;
+if (Le lecteur a payé sa cotisation et s'il a moins de 5 emprunts) then (yes)
+  :Enregistrer emprunt (Référence du document, infos lecteur, date);
+else (no)
+  :Emprunt impossible;
+endif
+:Mettre à jour les enregistrements d'emprunts;
+stop
 @enduml
+
+
 
 ' add plantumUMl extension
 ' apt install plantumuml
