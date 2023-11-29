@@ -11,3 +11,5 @@
 - met l'accent sur les traitements
 - permet de modéliser le flux de travail d'un système 
 
+
+doc : https://laurent-audibert.developpez.com/Cours-UML/?page=diagramme-cas-utilisation#L2-5-4-c
