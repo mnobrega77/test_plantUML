@@ -1,0 +1,81 @@
+@startuml
+
+
+skinparam roundcorner 15
+
+class Document {
+  - reference: int
+  - titre: string
+  - datePublication: date
+  - statusDocument(): int
+}
+
+class Livre {
+  - auteur: string
+}
+
+class Journal {
+  - consultableSurPlace: boolean
+}
+
+class CD {
+  // propriétés spécifiques au CD
+}
+
+class DVD {
+  // propriétés spécifiques au DVD
+}
+
+class Abonne {
+  - id: int
+  - nom: string
+  - adresse: string
+  - telephone: string
+  - email: string
+  - cotisationPayee: boolean
+  - emprunts: List<Emprunt>
+  + rechercheDocuments(criteria: Criteria): List<Document>
+  + emprunteDocument(document: Document): void
+  + retourneDocument(document: Document): void
+  + updateInfosContact(adresse: string, telephone: string, email: string): void
+  
+}
+
+class Emprunt
+
+class Personnel {
+  + consulteStatusAbonne(abonne: Abonne): int
+  + enregistreEmprunt(abonne: Abonne, document: Document, dateEmprunt: date): void
+  + modifieInfosAbonne(abonne: Abonne, adresse: string, telephone: string, email: string): void
+}
+
+class Benevole {
+  + enregistreEmprunt(abonne: Abonne, document: Document, dateEmprunt: date): void
+}
+
+class Poste {
+  + rechercheDocuments(criteria: Criteria): List<Document>
+}
+
+enum Criteria {
+  TYPE
+  AUTEUR
+  REFERENCE
+  TITRE
+}
+
+Document <|-- Livre
+Document <|-- Journal
+Document <|-- CD
+Document <|-- DVD
+
+Abonne "1" -- "0..5" Emprunt
+Emprunt "1" -- "1" Document
+Emprunt "1" -- "1" Abonne
+
+Personnel -- Abonne : gère 
+Benevole -- Abonne : enregistre
+
+Document -- Poste : est consulté sur
+
+@enduml
